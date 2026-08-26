@@ -318,6 +318,14 @@ img, video, iframe {
 }
 
 </style>
+
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="application-name" content="RAFP Store">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="RAFP Store">
+<link rel="apple-touch-icon" href="./icon-192.png">
+
 </head>
 <body>
 <header class="site-header" id="home">
@@ -472,5 +480,14 @@ img, video, iframe {
   <strong class="gold-text">RANDOM AF PUBLISHING</strong>
   <p>Luxury digital products. Made for real life.</p>
 </footer>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
+
 </body>
 </html>
