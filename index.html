@@ -1,180 +1,292 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#030303">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 <title>Random AF Publishing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
 <style>
+:root{
+  --black:#000;
+  --black2:#050505;
+  --white:#fff;
+  --soft:#d8d8d8;
+  --gold:#ffd700;
+  --gold-hi:#fff7b0;
+  --gold-mid:#ffc400;
+  --gold-deep:#9f6900;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:#000}
 body{
-  background:
-    radial-gradient(circle at 50% 8%,rgba(255,214,91,.10),transparent 25%),
-    radial-gradient(circle at 10% 42%,rgba(212,166,52,.05),transparent 24%),
-    radial-gradient(circle at 90% 72%,rgba(255,215,92,.05),transparent 25%),
-    #030303;
-  color:#f5f5f5;
-  font-family:Arial,Helvetica,sans-serif;
-  line-height:1.55;
   min-height:100vh;
+  overflow-x:hidden;
+  color:var(--white);
+  background:#000;
+  font-family:"Cormorant Garamond",Georgia,serif;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 8% 12%,rgba(255,255,255,.08),transparent 24%),
+    radial-gradient(ellipse at 94% 33%,rgba(255,255,255,.055),transparent 22%),
+    radial-gradient(ellipse at 18% 76%,rgba(255,215,0,.045),transparent 22%),
+    radial-gradient(ellipse at 85% 88%,rgba(255,215,0,.035),transparent 18%),
+    #000;
+}
+body::after{
+  content:"";
+  position:fixed;inset:-15%;z-index:-2;pointer-events:none;
+  opacity:.9;
+  background:
+    linear-gradient(122deg,transparent 0 20%,rgba(255,255,255,.035) 25%,transparent 31% 48%,rgba(255,215,0,.035) 53%,transparent 60%),
+    linear-gradient(62deg,transparent 0 30%,rgba(255,255,255,.025) 36%,transparent 42% 68%,rgba(255,215,0,.028) 73%,transparent 80%);
+  filter:blur(12px);
+  transform:skewY(-5deg) scale(1.2);
 }
 a{-webkit-tap-highlight-color:transparent}
-header{
-  text-align:center;
-  padding:42px 18px 34px;
-  border-bottom:1px solid rgba(255,210,80,.32);
+.gold-text{
+  color:transparent;
+  background:linear-gradient(180deg,#fffbd0 0%,#fff18a 10%,#ffd700 26%,#ffb800 43%,#fff7ae 55%,#ffd000 68%,#a96f00 82%,#ffe766 100%);
+  -webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 7px rgba(255,215,0,.25));
 }
-.gold{
-  background:linear-gradient(180deg,#fff2a9 0%,#ffd85a 18%,#b77713 43%,#fff0a0 58%,#d6961e 77%,#fff1a1 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 18px rgba(255,202,56,.16);
+.spark{position:relative}
+.spark::after{
+  content:"✦";position:absolute;color:#fff6a0;font-size:.22em;
+  right:-.16em;top:.04em;text-shadow:0 0 5px #fff,0 0 12px #ffd700,0 0 22px #ffd700;
+}
+.ornament{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:min(330px,76vw);margin:18px auto;color:#ffd700;
+}
+.ornament::before,.ornament::after{
+  content:"";height:1px;flex:1;
+  background:linear-gradient(90deg,transparent,#ffd700);
+  box-shadow:0 0 7px rgba(255,215,0,.65);
+}
+.ornament::after{background:linear-gradient(90deg,#ffd700,transparent)}
+.ornament span{font-size:13px;text-shadow:0 0 10px #ffd700}
+.site-header{
+  text-align:center;padding:34px 18px 23px;
+  border-bottom:1px solid rgba(255,215,0,.45);
+  background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);
 }
 .logo{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:58px;font-weight:700;letter-spacing:10px;line-height:1;
+  font-family:"Cinzel",Georgia,serif;font-weight:800;
+  font-size:clamp(58px,16vw,92px);letter-spacing:.08em;line-height:.9;
 }
-.company{
-  margin-top:18px;font-family:Georgia,"Times New Roman",serif;
-  font-size:17px;font-weight:700;letter-spacing:5px;
+.brand{
+  margin-top:17px;font-family:"Cinzel",Georgia,serif;font-weight:700;
+  font-size:clamp(12px,3.5vw,16px);letter-spacing:.28em;
 }
-nav{
-  display:flex;justify-content:center;gap:48px;padding:19px 15px;
-  border-bottom:1px solid rgba(255,210,80,.18);
-  background:rgba(0,0,0,.62);
+.nav{
+  position:sticky;top:0;z-index:30;display:flex;justify-content:center;gap:42px;
+  padding:17px 14px;background:rgba(0,0,0,.93);
+  border-bottom:1px solid rgba(255,215,0,.32);backdrop-filter:blur(10px);
 }
-nav a{color:#fff;text-decoration:none;font-family:Georgia,serif;font-size:18px}
+.nav a{
+  color:#fff;text-decoration:none;font-family:"Cinzel",serif;font-size:13px;
+  letter-spacing:.12em;position:relative;
+}
+.nav a:first-child{color:#ffd700}
+.nav a:first-child::after{
+  content:"";position:absolute;height:1px;left:0;right:0;bottom:-7px;background:#ffd700;
+  box-shadow:0 0 8px #ffd700;
+}
 .hero{
-  text-align:center;padding:92px 28px 98px;max-width:760px;margin:auto;
+  text-align:center;max-width:900px;margin:auto;padding:76px 22px 92px;position:relative;
 }
-.hero h1,.section-title,.about h2{
-  font-family:Georgia,"Times New Roman",serif;font-weight:700;
+.hero::before{
+  content:"";position:absolute;left:-20%;right:-20%;top:8%;height:78%;
+  background:
+    radial-gradient(ellipse at 18% 45%,rgba(255,215,0,.08),transparent 28%),
+    radial-gradient(ellipse at 86% 70%,rgba(255,215,0,.065),transparent 25%);
+  filter:blur(18px);z-index:-1;
 }
-.hero h1{font-size:52px;line-height:1.08;letter-spacing:-1px}
-.tagline{
-  margin:32px auto 0;font-family:Georgia,serif;font-size:23px;
-  font-weight:700;font-style:italic;max-width:650px;
+.hero h1{
+  font-family:"Cinzel",Georgia,serif;text-transform:uppercase;
+  font-size:clamp(38px,9.6vw,68px);line-height:1.08;letter-spacing:.015em;
 }
-.hero p{
-  color:#d8d8d8;font-size:20px;line-height:1.75;
-  max-width:650px;margin:34px auto 0;
+.hero h1 .white{display:block;color:#fff;font-size:.82em;margin-top:5px}
+.hero-kicker{
+  margin-top:25px;font-family:"Cinzel",serif;font-size:clamp(13px,3.7vw,18px);
+  letter-spacing:.12em;text-transform:uppercase;
 }
-.shop-button{
-  display:inline-block;margin-top:48px;padding:17px 42px;border-radius:12px;
-  border:1px solid #ffe477;text-decoration:none;color:#090909;font-size:20px;
-  font-weight:800;
-  background:linear-gradient(180deg,#fff4ae 0%,#ffd85a 22%,#bd7a12 48%,#ffe477 73%,#d99c24 100%);
-  box-shadow:0 0 24px rgba(255,201,51,.25),inset 0 1px 1px rgba(255,255,255,.75);
+.script{
+  font-family:"Allura","Brush Script MT",cursive;font-size:clamp(31px,8vw,47px);
+  line-height:1;margin-top:4px;
 }
-.collection{padding:74px 28px 90px;border-top:1px solid rgba(255,210,80,.18)}
-.section-title{text-align:center;font-size:44px}
-.collection-intro{
-  text-align:center;color:#d4d4d4;font-size:18px;max-width:650px;
-  margin:18px auto 48px;
+.hero-copy{
+  max-width:610px;margin:24px auto 0;color:#eee;font-family:Arial,sans-serif;
+  font-size:15px;line-height:1.75;
 }
-.cards{max-width:720px;margin:auto;display:grid;gap:28px}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:34px;padding:16px 34px;border-radius:7px;
+  border:1px solid #fff09a;color:#080808;text-decoration:none;
+  font-family:"Cinzel",serif;font-size:13px;font-weight:800;letter-spacing:.08em;
+  background:
+    linear-gradient(105deg,transparent 0 18%,rgba(255,255,255,.72) 25%,transparent 32%) no-repeat,
+    linear-gradient(180deg,#fff6a4 0%,#ffd700 24%,#ffb900 48%,#fff18b 64%,#d99a00 82%,#ffe15a 100%);
+  background-size:220% 100%,100% 100%;
+  box-shadow:0 0 12px rgba(255,215,0,.55),0 0 32px rgba(255,215,0,.18),inset 0 1px 0 #fffbc7;
+  animation:shine 5s linear infinite;
+}
+@keyframes shine{0%{background-position:180% 0,0 0}55%,100%{background-position:-80% 0,0 0}}
+.collection{
+  padding:72px 20px 90px;border-top:1px solid rgba(255,215,0,.28);
+}
+.section-title{
+  text-align:center;font-family:"Cinzel",serif;text-transform:uppercase;
+  font-size:clamp(29px,7vw,46px);letter-spacing:.04em;
+}
+.section-copy{
+  max-width:650px;margin:15px auto 42px;text-align:center;color:#ddd;
+  font-family:Arial,sans-serif;font-size:14px;line-height:1.65;
+}
+.cards{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{
-  padding:42px 38px 44px;border-radius:22px;
-  border:1px solid rgba(238,190,61,.48);
-  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,198,47,.015));
-  box-shadow:0 12px 35px rgba(0,0,0,.4),inset 0 0 28px rgba(255,210,70,.018);
+  position:relative;min-height:355px;padding:34px 27px 30px;text-align:center;
+  border:1px solid rgba(255,215,0,.72);border-radius:5px;
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(0,0,0,.12) 42%,rgba(255,215,0,.018));
+  box-shadow:0 0 15px rgba(255,215,0,.08),inset 0 0 28px rgba(255,255,255,.015);
 }
-.product-type{
-  font-size:14px;font-weight:800;letter-spacing:4px;text-transform:uppercase;
+.card::before,.card::after{
+  content:"✦";position:absolute;color:#fff5a1;font-size:8px;
+  text-shadow:0 0 5px #fff,0 0 12px #ffd700;
+}
+.card::before{top:-5px;left:16%}.card::after{right:10%;bottom:-5px}
+.icon{
+  width:58px;height:58px;border:1px solid #ffd700;border-radius:50%;
+  margin:0 auto 18px;display:grid;place-items:center;color:#ffd700;font-size:26px;
+  box-shadow:0 0 14px rgba(255,215,0,.16),inset 0 0 12px rgba(255,215,0,.05);
+}
+.type{
+  font-family:"Cinzel",serif;font-size:11px;letter-spacing:.17em;text-transform:uppercase;
 }
 .card h3{
-  margin-top:20px;font-family:Georgia,serif;font-size:34px;line-height:1.15;
+  margin-top:14px;font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:31px;line-height:1.02;color:#fff;
 }
-.card p{margin-top:22px;color:#d0d0d0;font-size:18px;line-height:1.65}
+.mini-ornament{width:105px;margin:15px auto 16px;height:1px;background:linear-gradient(90deg,transparent,#ffd700,transparent);box-shadow:0 0 5px rgba(255,215,0,.5)}
+.card p{color:#e2e2e2;font-family:Arial,sans-serif;font-size:13px;line-height:1.65}
 .coming{
-  display:inline-block;margin-top:28px;font-size:14px;font-weight:900;
-  letter-spacing:4px;text-transform:uppercase;
+  margin-top:24px;font-family:"Cinzel",serif;font-size:10px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
 }
 .about{
-  text-align:center;padding:94px 30px;border-top:1px solid rgba(255,210,80,.18);
+  text-align:center;padding:82px 22px;border-top:1px solid rgba(255,215,0,.3);
 }
-.about h2{font-size:44px}
+.about h2{
+  font-family:"Cinzel",serif;text-transform:uppercase;font-size:clamp(28px,7vw,45px);
+}
 .about p{
-  max-width:650px;margin:28px auto 0;color:#d5d5d5;font-size:19px;line-height:1.8;
+  max-width:650px;margin:20px auto 0;color:#e5e5e5;font-family:Arial,sans-serif;
+  font-size:14px;line-height:1.8;
 }
+.about .script{margin-top:19px;font-size:38px}
 footer{
-  text-align:center;padding:48px 24px;border-top:1px solid rgba(255,210,80,.22);
+  text-align:center;padding:38px 20px 44px;border-top:1px solid rgba(255,215,0,.34);
+  background:#000;
 }
 footer strong{
-  display:block;font-family:Georgia,serif;font-size:18px;letter-spacing:4px;
+  font-family:"Cinzel",serif;font-size:13px;letter-spacing:.22em;
 }
-footer p{margin-top:13px;color:#aaa;font-size:14px}
-@media(max-width:600px){
-  .logo{font-size:52px;letter-spacing:8px}
-  .company{font-size:14px;letter-spacing:4px}
-  nav{gap:40px}
-  .hero{padding:78px 26px 84px}
-  .hero h1{font-size:42px}
-  .tagline{font-size:20px}
-  .hero p{font-size:18px}
-  .section-title,.about h2{font-size:38px}
-  .card{padding:36px 28px 38px}
-  .card h3{font-size:31px}
+footer p{margin-top:10px;color:#aaa;font-family:Arial,sans-serif;font-size:11px;letter-spacing:.05em}
+.logo,.brand,.nav,.hero h1,.hero-kicker,.script,.cta,.section-title,.type,.coming,.about h2,footer strong{
+  -webkit-user-select:none;user-select:none;
+}
+@media(max-width:760px){
+  .cards{grid-template-columns:1fr;max-width:520px}
+  .card{min-height:0}
+}
+@media(max-width:430px){
+  .site-header{padding-top:30px}
+  .nav{gap:34px}
+  .hero{padding-top:64px;padding-bottom:78px}
+  .hero h1{font-size:clamp(34px,10.3vw,45px)}
+  .hero h1 .white{font-size:.74em;white-space:nowrap}
+  .collection{padding-left:16px;padding-right:16px}
+  .card{padding:32px 24px}
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo gold">RAFP</div>
-  <div class="company gold">RANDOM AF PUBLISHING</div>
+<header class="site-header" id="home">
+  <div class="logo gold-text spark">RAFP</div>
+  <div class="brand gold-text">RANDOM AF PUBLISHING</div>
+  <div class="ornament"><span>◆</span></div>
 </header>
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#shop">Shop</a>
-  <a href="#about">About</a>
+<nav class="nav" aria-label="Main navigation">
+  <a href="#home">HOME</a>
+  <a href="#shop">SHOP</a>
+  <a href="#about">ABOUT</a>
 </nav>
 
-<main id="home">
+<main>
 <section class="hero">
-  <h1>Luxury Digital Products.<br>Made for Real Life.</h1>
-  <div class="tagline gold">The products are random. The quality isn’t.</div>
-  <p>Thoughtfully designed digital products that are beautiful, useful, easy to use, and made to feel luxurious.</p>
-  <a class="shop-button" href="#shop">Explore the Store</a>
+  <h1>
+    <span class="gold-text">Luxury Digital Products.</span>
+    <span class="white">Made for Real Life.</span>
+  </h1>
+  <div class="ornament"><span>◆</span></div>
+  <div class="hero-kicker gold-text">The products are random.</div>
+  <div class="script gold-text">The quality isn’t.</div>
+  <p class="hero-copy">Thoughtfully designed digital products that are beautiful, useful, easy to use, and made to feel luxurious.</p>
+  <a class="cta" href="#shop">EXPLORE THE STORE <span>›</span></a>
 </section>
 
 <section class="collection" id="shop">
-  <h2 class="section-title">The RAFP Collection</h2>
-  <p class="collection-intro">Interactive digital products and publications designed for real life — with Random AF quality built into every one.</p>
+  <h2 class="section-title gold-text">The RAFP Collection</h2>
+  <div class="ornament"><span>◆</span></div>
+  <p class="section-copy">Interactive digital products and publications designed for real life — with Random AF quality built into every one.</p>
 
   <div class="cards">
     <article class="card">
-      <div class="product-type gold">RAF Interactive</div>
-      <h3>Miles Ahead of Me</h3>
+      <div class="icon">▱</div>
+      <div class="type gold-text">RAF Interactive</div>
+      <h3>Miles Ahead<br>of Me</h3>
+      <div class="mini-ornament"></div>
       <p>A private 31-day interactive story journal created for drivers, memories, reflections, photos, and the miles ahead.</p>
-      <div class="coming gold">Coming Soon</div>
+      <div class="coming gold-text">Coming Soon</div>
     </article>
 
     <article class="card">
-      <div class="product-type gold">RAF Interactive</div>
-      <h3>My 365 Moments</h3>
+      <div class="icon">◉</div>
+      <div class="type gold-text">RAF Interactive</div>
+      <h3>My 365<br>Moments</h3>
+      <div class="mini-ornament"></div>
       <p>One photo. One caption. One moment a day. Build an entire year of memories and play it back when the year is complete.</p>
-      <div class="coming gold">Coming Soon</div>
+      <div class="coming gold-text">Coming Soon</div>
     </article>
 
     <article class="card">
-      <div class="product-type gold">RAF Publications</div>
-      <h3>More Randomness Is Coming</h3>
+      <div class="icon">✧</div>
+      <div class="type gold-text">RAF Publications</div>
+      <h3>More Randomness<br>Is Coming</h3>
+      <div class="mini-ornament"></div>
       <p>New interactive products, publications, and useful digital creations are being built for the RAFP collection.</p>
-      <div class="coming gold">Coming Soon</div>
+      <div class="coming gold-text">Coming Soon</div>
     </article>
   </div>
 </section>
 
 <section class="about" id="about">
-  <h2>Random AF Publishing</h2>
+  <h2 class="gold-text">Random AF Publishing</h2>
+  <div class="ornament"><span>◆</span></div>
   <p>We create beautiful, useful digital products that make everyday life easier and more memorable without sacrificing the feeling of luxury.</p>
-  <p>The products may be random. The standard is not.</p>
+  <div class="script gold-text">The products may be random. The standard is not.</div>
 </section>
 </main>
 
 <footer>
-  <strong class="gold">RANDOM AF PUBLISHING</strong>
+  <strong class="gold-text">RANDOM AF PUBLISHING</strong>
   <p>Luxury digital products. Made for real life.</p>
 </footer>
 </body>
