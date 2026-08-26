@@ -464,6 +464,208 @@ img, video, iframe {
   overflow-wrap:anywhere;
 }
 
+
+/* RAFP CART INFRASTRUCTURE */
+.cart-launcher{
+  position:fixed;
+  right:16px;
+  bottom:18px;
+  z-index:60;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:12px 16px;
+  border:1px solid #fff09a;
+  border-radius:999px;
+  background:linear-gradient(180deg,#fff6a4 0%,#ffd700 28%,#ffb900 52%,#fff18b 68%,#d99a00 86%,#ffe15a 100%);
+  color:#080808;
+  font-family:"Cinzel",serif;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  box-shadow:0 0 16px rgba(255,215,0,.42),inset 0 1px 0 #fffbc7;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.cart-count{
+  min-width:22px;
+  height:22px;
+  padding:0 6px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:#000;
+  color:#ffd700;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  font-weight:700;
+}
+
+.cart-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:70;
+  background:rgba(0,0,0,.68);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+
+.cart-backdrop.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.cart-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  z-index:80;
+  width:min(420px,92vw);
+  height:100dvh;
+  padding:24px 20px 28px;
+  background:#050505;
+  border-left:1px solid rgba(255,215,0,.5);
+  box-shadow:-10px 0 30px rgba(0,0,0,.5),-2px 0 18px rgba(255,215,0,.06);
+  transform:translateX(105%);
+  transition:transform .24s ease;
+  overflow-y:auto;
+}
+
+.cart-drawer.open{
+  transform:translateX(0);
+}
+
+.cart-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(255,215,0,.28);
+}
+
+.cart-title{
+  font-family:"Cinzel",serif;
+  font-size:22px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.cart-close{
+  width:40px;
+  height:40px;
+  border:1px solid rgba(255,215,0,.5);
+  border-radius:50%;
+  background:#000;
+  color:#ffd700;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.cart-items{
+  display:grid;
+  gap:14px;
+  margin-top:20px;
+}
+
+.cart-empty{
+  padding:26px 18px;
+  border:1px solid rgba(255,215,0,.25);
+  border-radius:12px;
+  color:#d8d8d8;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  line-height:1.7;
+  text-align:center;
+}
+
+.cart-item{
+  padding:16px;
+  border:1px solid rgba(255,215,0,.3);
+  border-radius:12px;
+  background:rgba(255,215,0,.018);
+}
+
+.cart-item-name{
+  color:#fff;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:22px;
+  font-weight:700;
+}
+
+.cart-item-meta{
+  margin-top:4px;
+  color:#aaa;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+}
+
+.cart-remove{
+  margin-top:10px;
+  border:0;
+  background:transparent;
+  color:#ffd86a;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+.cart-summary{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,215,0,.28);
+}
+
+.cart-summary-line{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  color:#eee;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+}
+
+.cart-checkout{
+  width:100%;
+  margin-top:18px;
+  padding:15px 18px;
+  border:1px solid #fff09a;
+  border-radius:7px;
+  background:linear-gradient(180deg,#fff6a4 0%,#ffd700 28%,#ffb900 52%,#fff18b 68%,#d99a00 86%,#ffe15a 100%);
+  color:#080808;
+  font-family:"Cinzel",serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  cursor:pointer;
+}
+
+.cart-checkout:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.cart-note{
+  margin-top:12px;
+  color:#999;
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  line-height:1.55;
+  text-align:center;
+}
+
+@media(max-width:430px){
+  .cart-launcher{
+    right:12px;
+    bottom:14px;
+    padding:11px 14px;
+  }
+}
+
 </style>
 
 <link rel="manifest" href="./manifest.webmanifest">
@@ -656,6 +858,34 @@ img, video, iframe {
 </section>
 </main>
 
+
+<button class="cart-launcher" id="cartLauncher" type="button" aria-controls="cartDrawer" aria-expanded="false">
+  CART <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<div class="cart-backdrop" id="cartBackdrop"></div>
+
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Shopping cart">
+  <div class="cart-head">
+    <div class="cart-title gold-text">Your Cart</div>
+    <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">×</button>
+  </div>
+
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Your cart is empty. Products will appear here after you choose <strong>Add to Cart</strong>.</div>
+  </div>
+
+  <div class="cart-summary">
+    <div class="cart-summary-line">
+      <span>Items</span>
+      <strong id="cartItemTotal">0</strong>
+    </div>
+    <button class="cart-checkout" id="cartCheckout" type="button" disabled>CHECKOUT</button>
+    <div class="cart-note">Checkout will be handled securely by Payhip. Payment processing is handled through the payment methods connected to your Payhip checkout.</div>
+  </div>
+</aside>
+
+
 <footer>
   <strong class="gold-text">RANDOM AF PUBLISHING</strong>
   <p>Luxury digital products. Made for real life.</p>
@@ -714,6 +944,125 @@ img, video, iframe {
       }
     });
   }
+})();
+</script>
+
+
+<script>
+(() => {
+  const STORAGE_KEY = "rafp_cart_v1";
+  const launcher = document.getElementById("cartLauncher");
+  const count = document.getElementById("cartCount");
+  const drawer = document.getElementById("cartDrawer");
+  const backdrop = document.getElementById("cartBackdrop");
+  const closeBtn = document.getElementById("cartClose");
+  const itemsBox = document.getElementById("cartItems");
+  const itemTotal = document.getElementById("cartItemTotal");
+  const checkout = document.getElementById("cartCheckout");
+
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const saveCart = (cart) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    renderCart();
+  };
+
+  const openCart = () => {
+    drawer.classList.add("open");
+    backdrop.classList.add("show");
+    drawer.setAttribute("aria-hidden","false");
+    launcher.setAttribute("aria-expanded","true");
+  };
+
+  const closeCart = () => {
+    drawer.classList.remove("open");
+    backdrop.classList.remove("show");
+    drawer.setAttribute("aria-hidden","true");
+    launcher.setAttribute("aria-expanded","false");
+  };
+
+  const renderCart = () => {
+    const cart = readCart();
+    count.textContent = cart.length;
+    itemTotal.textContent = cart.length;
+    checkout.disabled = cart.length === 0;
+
+    if (!cart.length) {
+      itemsBox.innerHTML = '<div class="cart-empty">Your cart is empty. Products will appear here after you choose <strong>Add to Cart</strong>.</div>';
+      return;
+    }
+
+    itemsBox.innerHTML = cart.map((item, index) => `
+      <div class="cart-item">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${item.price || ""}</div>
+        <button class="cart-remove" type="button" data-remove="${index}">Remove</button>
+      </div>
+    `).join("");
+  };
+
+  itemsBox.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-remove]");
+    if (!button) return;
+    const index = Number(button.dataset.remove);
+    const cart = readCart();
+    cart.splice(index,1);
+    saveCart(cart);
+  });
+
+  checkout.addEventListener("click", () => {
+    const cart = readCart();
+    const keys = cart.map(item => item.payhipKey).filter(Boolean);
+
+    if (!keys.length) return;
+
+    const params = keys
+      .map(key => "cart_links[]=" + encodeURIComponent(key))
+      .join("&");
+
+    window.location.href = "https://payhip.com/buy?" + params;
+  });
+
+  launcher.addEventListener("click", openCart);
+  closeBtn.addEventListener("click", closeCart);
+  backdrop.addEventListener("click", closeCart);
+
+  window.RAFP_CART = {
+    add(product) {
+      if (!product || !product.name || !product.payhipKey) return false;
+
+      const cart = readCart();
+      if (!cart.some(item => item.payhipKey === product.payhipKey)) {
+        cart.push({
+          name: product.name,
+          price: product.price || "",
+          payhipKey: product.payhipKey
+        });
+        saveCart(cart);
+      }
+
+      openCart();
+      return true;
+    },
+    removeByKey(payhipKey) {
+      saveCart(readCart().filter(item => item.payhipKey !== payhipKey));
+    },
+    clear() {
+      saveCart([]);
+    },
+    getItems() {
+      return readCart();
+    }
+  };
+
+  renderCart();
 })();
 </script>
 
