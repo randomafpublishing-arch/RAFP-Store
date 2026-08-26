@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <title>Random AF Publishing</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #090909;
+      color: #f8f1df;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 28px 20px 22px;
+      text-align: center;
+      border-bottom: 1px solid #a8873a;
+    }
+
+    .logo {
+      color: #d6b45c;
+      font-family: Georgia, serif;
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 5px;
+    }
+
+    .company {
+      margin-top: 8px;
+      font-family: Georgia, serif;
+      font-size: 17px;
+      letter-spacing: 2px;
+      color: #f8f1df;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding: 16px;
+      border-bottom: 1px solid #292929;
+    }
+
+    nav a {
+      color: #f8f1df;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 22px 48px;
+      background:
+        radial-gradient(circle at top, #29200d 0%, #090909 58%);
+    }
+
+    .hero h1 {
+      max-width: 650px;
+      margin: auto;
+      font-family: Georgia, serif;
+      font-size: 39px;
+      line-height: 1.12;
+      color: #f8f1df;
+    }
+
+    .hero p {
+      max-width: 520px;
+      margin: 20px auto 0;
+      color: #cfc7b5;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .tagline {
+      margin-top: 25px;
+      color: #d6b45c;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .shop-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      border: 1px solid #d6b45c;
+      border-radius: 30px;
+      color: #090909;
+      background: #d6b45c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .products {
+      padding: 48px 18px 60px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: Georgia, serif;
+      font-size: 29px;
+      margin-bottom: 30px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #111111;
+      border: 1px solid #3b3322;
+      border-radius: 18px;
+      padding: 26px 20px;
+      min-height: 220px;
+    }
+
+    .product-type {
+      color: #d6b45c;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+
+    .product-card h3 {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .product-card p {
+      color: #bbb3a3;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .coming {
+      display: inline-block;
+      margin-top: 20px;
+      color: #d6b45c;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid #292929;
+      color: #8f897e;
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: #d6b45c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">RAFP</div>
+    <div class="company">RANDOM AF PUBLISHING</div>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <main id="home">
+
+    <section class="hero">
+      <h1>Luxury Digital Products Made for Real Life.</h1>
+
+      <p>
+        Beautiful, useful and thoughtfully designed digital products
+        created to make everyday life easier and more memorable.
+      </p>
+
+      <div class="tagline">
+        The products are random. The quality isn't.
+      </div>
+
+      <a class="shop-button" href="#shop">Explore the Store</a>
+    </section>
+
+    <section class="products" id="shop">
+      <h2 class="section-title">The RAFP Collection</h2>
+
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="product-type">RAF INTERACTIVE</div>
+          <h3>Miles Ahead of Me</h3>
+          <p>
+            A 31-day interactive story journal designed for life on the road.
+          </p>
+          <span class="coming">COMING TO THE STORE</span>
+        </article>
+
+        <article class="product-card">
+          <div class="product-type">RAF INTERACTIVE</div>
+          <h3>My 365 Moments</h3>
+          <p>
+            Turn an entire year of photos and memories into your own
+            interactive digital experience.
+          </p>
+          <span class="coming">COMING TO THE STORE</span>
+        </article>
+
+        <article class="product-card">
+          <div class="product-type">RAF PUBLICATIONS</div>
+          <h3>More Randomness Is Coming</h3>
+          <p>
+            New useful, unexpected and beautifully designed digital products
+            will continue joining the RAFP collection.
+          </p>
+          <span class="coming">STAY TUNED</span>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="products" id="about">
+      <h2 class="section-title">Random
